@@ -1,0 +1,16 @@
+{
+  "name": "react-ru-redux",
+  "version": "1.0.0",
+  "description": "redux tutorial",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Andranik Simonyan",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^1.13.3",
+    "webpack-dev-middleware": "^1.8.4",
+    "webpack-hot-middleware": "^2.13.1"
+  }
+}
