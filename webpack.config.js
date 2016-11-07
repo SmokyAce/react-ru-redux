@@ -1,17 +1,18 @@
-
 var path = require('path')
 var webpack = require('webpack')
 var NpmInstallPlugin = require('npm-install-webpack-plugin')
+var autoprefixer = require('autoprefixer');
+var precss = require('precss');
 
 module.exports = {
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'inline-module-source-map',
     entry: [
         'webpack-hot-middleware/client',
         'babel-polyfill',
         './src/index'
     ],
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, 'static'),
         filename: 'bundle.js',
         publicPath: '/static/'
     },
@@ -20,9 +21,8 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new NpmInstallPlugin()
     ],
-    module: { //Обновлено
-
-        preLoaders: [ //добавили ESlint в preloaders
+    module: {
+        preLoaders: [
             {
                 test: /\.js$/,
                 loaders: ['eslint'],
@@ -31,16 +31,22 @@ module.exports = {
                 ],
             }
         ],
-
-        loaders: [ //добавили babel-loader
+        loaders: [
             {
-                loaders: ['react-hot', 'babel-loader'], //добавили loader 'react-hot'
+                loaders: ['react-hot', 'babel-loader'],
                 include: [
                     path.resolve(__dirname, "src"),
                 ],
                 test: /\.js$/,
                 plugins: ['transform-runtime'],
+            },
+            {
+                test:   /\.css$/,
+                loader: "style-loader!css-loader!postcss-loader"
             }
         ]
+    },
+    postcss: function () {
+        return [autoprefixer, precss];
     }
 }
