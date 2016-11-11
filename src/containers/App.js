@@ -8,13 +8,14 @@ import * as userActions from '../actions/UserActions'
 
 class App extends Component {
     render() {
-        const { user, page } = this.props
-        const { getPhotos } = this.props.pageActions
-        const { handleLogin } = this.props.userActions
+        const { user, page } = this.props;
+        const { getPhotos } = this.props.pageActions;
+        const { handleLogin } = this.props.userActions;
+        const { checkAuth} = this.props.userActions;
 
         return <div className='row'>
-            <Page photos={page.photos} year={page.year} getPhotos={getPhotos} fetching={page.fetching} />
-            <User name={user.name} handleLogin={handleLogin} error={user.error} />
+            <Page photos={page.photos} year={page.year} getPhotos={getPhotos} fetching={page.fetching} error={page.error} />
+            <User name={user.name} handleLogin={handleLogin} checkAuth={checkAuth} error={user.error} />
         </div>
     }
 }

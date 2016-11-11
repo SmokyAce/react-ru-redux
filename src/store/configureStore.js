@@ -5,15 +5,15 @@ import thunk from 'redux-thunk' // <-- добавили redux-thunk
 
 
 export default function configureStore(initialState) {
-    const logger = createLogger()
+    const logger = createLogger();
     const store = createStore(
         rootReducer,
         initialState,
-        applyMiddleware(thunk, logger)) // <-- добавили его в цепочку перед logger'ом
+        applyMiddleware(thunk, logger)); // <-- добавили его в цепочку перед logger'ом
 
     if (module.hot) {
         module.hot.accept('../reducers', () => {
-            const nextRootReducer = require('../reducers')
+            const nextRootReducer = require('../reducers');
             store.replaceReducer(nextRootReducer)
         })
     }
