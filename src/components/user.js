@@ -2,8 +2,6 @@ import React, { PropTypes, Component } from 'react'
 
 export default class User extends Component {
 
-
-
     render() {
         const { name, error } = this.props;
         let template;

@@ -4,12 +4,13 @@ import createLogger from 'redux-logger'
 import thunk from 'redux-thunk' // <-- добавили redux-thunk
 
 
-export default function configureStore(initialState) {
+ export const configureStore = (initialState) => {
     const logger = createLogger();
+
     const store = createStore(
-        rootReducer,
-        initialState,
-        applyMiddleware(thunk, logger)); // <-- добавили его в цепочку перед logger'ом
+                rootReducer,
+                initialState,
+                applyMiddleware(thunk, logger)); // <-- добавили его в цепочку перед logger'ом
 
     if (module.hot) {
         module.hot.accept('../reducers', () => {
@@ -19,4 +20,6 @@ export default function configureStore(initialState) {
     }
 
     return store
-}
+};
+
+export default (configureStore)
