@@ -23,7 +23,6 @@ function makeYearPhotos(photos, selectedYear) {
 }
 
 function getMorePhotos(offset, count, year, dispatch) {
-    debugger
     VK.Api.call('photos.getAll', {extended:1, count: count, offset: offset},(r) => { // eslint-disable-line no-undef
         try {
             if (offset <= r.response[0] - count) {
