@@ -3,8 +3,8 @@ import React, { PropTypes, Component } from 'react'
 export default class User extends Component {
 
     render() {
-        const { name, error } = this.props
-        let template
+        const { name, error } = this.props;
+        let template;
 
         if (name) {
             template = <p>Привет, {name}!</p>
@@ -23,5 +23,6 @@ export default class User extends Component {
 User.propTypes = {
     name: PropTypes.string.isRequired,
     handleLogin: PropTypes.func.isRequired,
+    checkAuth: PropTypes.func.isRequired,
     error: PropTypes.string.isRequired
-}
+};

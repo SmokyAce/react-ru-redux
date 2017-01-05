@@ -25,13 +25,13 @@ function makeYearPhotos(photos, selectedYear) {
 function getMorePhotos(offset, count, year, dispatch) {
     VK.Api.call('photos.getAll', {extended:1, count: count, offset: offset},(r) => { // eslint-disable-line no-undef
         try {
-            if (offset <= r.response[0] - count) {
-                offset+=200;
-                photosArr = photosArr.concat(r.response)
+            photosArr = photosArr.concat(r.response);
+            if (offset <= r.response[0] - count && r.response[0] > count )  {
+                offset+=count;
                 getMorePhotos(offset,count,year,dispatch)
             } else {
-                let photos = makeYearPhotos(photosArr, year)
-                cached = true
+                let photos = makeYearPhotos(photosArr, year);
+                cached = true;
                 dispatch({
                     type: GET_PHOTOS_SUCCESS,
                     payload: photos
@@ -55,7 +55,7 @@ export function getPhotos(year) {
         dispatch({
             type: GET_PHOTOS_REQUEST,
             payload: year
-        })
+        });
 
         if (cached) {
             let photos = makeYearPhotos(photosArr, year)

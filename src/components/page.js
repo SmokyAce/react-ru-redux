@@ -33,4 +33,4 @@ Page.propTypes = {
     photos: PropTypes.array.isRequired,
     getPhotos: PropTypes.func.isRequired,
     error: PropTypes.string.isRequired
-}
+};

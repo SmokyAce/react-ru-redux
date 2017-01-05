@@ -1,17 +1,21 @@
+
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import App from './containers/App'
+import router from './router'
 import './styles/app.css'
 import configureStore from './store/configureStore'
+import { loadState, saveState } from './store/localStorage'
 
-const store = configureStore()
+const persistedState = loadState();
+
+const store = configureStore(persistedState);
+
+store.subscribe(() =>{
+    saveState(store.getState());
+});
 
 render(
-    <Provider store={store}>
-        <div className='app'>
-            <App />
-        </div>
-    </Provider>,
+    <Provider store={store}>{router}</Provider>,
     document.getElementById('root')
-)
+);
